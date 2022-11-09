@@ -30,3 +30,6 @@ and ushort，存储在stack的内存空间；引用类型在C# 里有string， a
 所有的引用类型默认是null；数字是0；bool是false，char是'\0',Enum是0；
 可以是使用default
 
+
+dotnet new console -n exer/exer2_02
+ dotnet run --project exer2_03    
