@@ -17,4 +17,5 @@ public partial class Product
     public int Manufacturerid { get; set; }
 
     public virtual Manufacturer Manufacturer { get; set; } = null!;
+
 }

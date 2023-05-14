@@ -3,12 +3,38 @@ using System.Collections.Generic;
 using System.Linq;
 using Exer06.TalkingWithDb.Orm;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
 
 namespace exer6_01.GlobalFactory2021
 {
     public static class Demo
     {
-        public static void Run(){
+        public static void Run()
+        {
+            DataSeeding.SeedDataNotSeededBefore();
+            CompareExecTimes(EnumerableVSQueryable.Slow, EnumerableVSQueryable.Fast, "IEnumerable over IQueryable");
+            CompareExecTimes(MethodChoice.Slow, MethodChoice.Fast, "equals over ==");
+            CompareExecTimes(Loading.Lazy, Loading.Eager, "Lazy over Eager loading");
+            CompareExecTimes(LightweightEf.Default, LightweightEf.AsNoTracking, "AsNoTracking for many readonly entities");
+            CompareExecTimes(MultipleAddsOrRemoves.Slow, MultipleAddsOrRemoves.Fast, "Add over AddRange");
+        }
+        private static void CompareExecTimes(Action slow, Action fast, string scenarioLabel)
+        {
+            var sw = new Stopwatch();
+            sw.Start();
+            slow();
+            sw.Stop();
+            var slowTime = sw.ElapsedMilliseconds;
+            sw.Restart();
+            fast();
+            sw.Stop();
+            var fastTime = sw.ElapsedMilliseconds;
+            Console.WriteLine("{0,-40} Scenario1:{1,-7} Scenario2: {2}",
+                scenarioLabel.ToUpper(),
+                slowTime + "ms,", fastTime + "ms");
+        }
+        public static void Run1()
+        {
             var db = new Globalfactory2021Context();
             var manufacturer = new Manufacturer
             {
@@ -58,6 +84,6 @@ namespace exer6_01.GlobalFactory2021
             Console.WriteLine($"{manufacturerAfterAddition.Name} {productAfterAddition.Name} {productAfterAddition.GetPrice()}");
             db.Dispose();
         }
-   
+
     }
 }
