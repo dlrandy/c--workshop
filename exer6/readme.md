@@ -45,8 +45,8 @@ Apply the previous migration
 // a custom migration script for big and complex database
 dotnet ef migrations script -c globalfactory2021context
 
-
-
+// transfer migration to script
+dotnet ef migrations script -c globalfactory2021context -o sql.sh
 
 
 
