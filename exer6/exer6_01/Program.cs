@@ -9,7 +9,8 @@ namespace Exer06
         static void Main(string[] args){
             // Exer06.exers.exer01.Demo.Run();
             //  Exer06.TalkingWithDb.Orm.Demo.Run();
-             Exer06.Crud.Demo.Run();
+            //  Exer06.Crud.Demo.Run();
+             exer6_01.GlobalFactory2021.Demo.Run();
         }
         private static string GetEnvironmentVariableOrThrow(string environmentVariable){
             var variable = Environment.GetEnvironmentVariable(environmentVariable, EnvironmentVariableTarget.Process);

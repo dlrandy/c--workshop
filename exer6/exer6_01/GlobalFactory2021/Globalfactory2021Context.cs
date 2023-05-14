@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace exer6_01.GlobalFactory2021;
 
@@ -57,13 +58,21 @@ public partial class Globalfactory2021Context : DbContext
             entity.Property(e => e.Name)
                 .HasMaxLength(50)
                 .HasColumnName("name");
-            entity.Property(e => e.Price)
-                .HasColumnType("money")
-                .HasColumnName("price");
+            // entity.Property(e => e.Price)
+            //     .HasColumnType("money")
+            //     .HasColumnName("price");
 
             entity.HasOne(d => d.Manufacturer).WithMany(p => p.Products)
                 .HasForeignKey(d => d.Manufacturerid)
                 .HasConstraintName("product_manufacturerid_id");
+        });
+
+        modelBuilder.Entity<ProductPriceHistory>(entity =>
+        {
+            entity.ToTable("ProductPriceHistory", "factory");
+            entity.Property(e => e.Price).HasColumnType("money");
+            entity.Property(e => e.DateOfPrice).HasColumnType("date");
+            RelationalForeignKeyBuilderExtensions.HasConstraintName((ReferenceCollectionBuilder)entity.HasOne(d=>d.Product).WithMany(p=>p.PriceHistory).HasForeignKey(d=>d.ProductId),"FK_ProductPriceHistory_Product");
         });
 
         OnModelCreatingPartial(modelBuilder);
