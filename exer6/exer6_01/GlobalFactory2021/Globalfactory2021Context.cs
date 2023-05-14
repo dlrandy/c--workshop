@@ -40,6 +40,8 @@ public partial class Globalfactory2021Context : DbContext
             entity.Property(e => e.Name)
                 .HasMaxLength(50)
                 .HasColumnName("name");
+            entity.Property(e => e.FoundedAt)
+                .HasColumnType("date");
         });
 
         modelBuilder.Entity<Product>(entity =>

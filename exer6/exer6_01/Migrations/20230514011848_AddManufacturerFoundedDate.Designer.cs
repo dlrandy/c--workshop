@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using exer6_01.GlobalFactory2021;
@@ -11,9 +12,11 @@ using exer6_01.GlobalFactory2021;
 namespace exer6_01.Migrations
 {
     [DbContext(typeof(Globalfactory2021Context))]
-    partial class Globalfactory2021ContextModelSnapshot : ModelSnapshot
+    [Migration("20230514011848_AddManufacturerFoundedDate")]
+    partial class AddManufacturerFoundedDate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -38,7 +41,8 @@ namespace exer6_01.Migrations
                         .HasColumnName("country");
 
                     b.Property<DateTime>("FoundedAt")
-                        .HasColumnType("date");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("date");
 
                     b.Property<string>("Name")
                         .IsRequired()

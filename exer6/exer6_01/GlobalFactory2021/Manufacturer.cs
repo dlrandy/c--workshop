@@ -6,6 +6,7 @@ namespace exer6_01.GlobalFactory2021;
 public partial class Manufacturer
 {
     public int Id { get; set; }
+    public DateTime FoundedAt {get; set;}
 
     public string Name { get; set; } = null!;
 
