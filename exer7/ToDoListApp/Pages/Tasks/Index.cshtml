@@ -16,19 +16,22 @@
         <kanban-list name="To DO" size="4">
             @foreach (var task in Model.Tasks.Where(t => t.Status == ETaskStatus.ToDo))
             {
-                <kanban-card task="@task.Description"></kanban-card>
+                @* <kanban-card task="@task.Description"></kanban-card> *@
+                <partial name="_TaskItem" model="@task" />
             }
         </kanban-list>
         <kanban-list name="Doing" size="4">
             @foreach (var task in Model.Tasks.Where(t => t.Status == ETaskStatus.Doing))
             {
-                <kanban-card task="@task.Description"></kanban-card>
+                @* <kanban-card task="@task.Description"></kanban-card> *@
+                  <partial name="_TaskItem" model="@task" />
             }
         </kanban-list>
         <kanban-list name="Done" size="4">
             @foreach (var task in Model.Tasks.Where(t => t.Status == ETaskStatus.Done))
             {
-                <kanban-card task="@task.Description"></kanban-card>
+                @* <kanban-card task="@task.Description"></kanban-card> *@
+                  <partial name="_TaskItem" model="@task" />
             }
         </kanban-list>
         @* <div class="col-4">
