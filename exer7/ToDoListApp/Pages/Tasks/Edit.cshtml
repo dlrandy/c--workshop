@@ -1,0 +1,45 @@
+@page "/tasks/{id}"
+@model EditModel
+@{
+    ViewData["Title"] = "Task";
+}
+
+<h2>Edit</h2>
+<div>
+    <h4>@ViewData["Title"]</h4>
+    <hr />
+    <div class="row">
+    <form action="post" class="col-6">
+        <div class="form-group">
+            <label asp-for="Task.Title"></label>
+            <input asp-for="Task.Title" class="form-control" />
+            <span asp-validation-for="Task.Title" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Task.Description"></label>
+            <input asp-for="Task.Description" class="form-control" />
+            <span asp-validation-for="Task.Description" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Task.DueTo"></label>
+            <input type="datetime-local" asp-for="Task.DueTo" class="form-control" />
+            <span asp-validation-for="Task.DueTo" class="text-danger"></span>
+        </div>
+        <div class="form-group-inline">
+            <a asp-page="Index" class="btn btn-danger">
+                Back
+            </a>
+            <button type="submit" class="btn btn-primary">
+                    Edit Task
+                </button>
+        </div>
+    </form>
+    <div class="col-6">
+         @(await Component.InvokeAsync("ActivityLog",Model.Task.Id))
+    </div>
+    </div>
+</div>
+
+@section scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

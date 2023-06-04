@@ -1,0 +1,21 @@
+
+<form class="form-inline my-2 my-lg-0">
+    @{
+        var delayedEmoji = Model.Delayed > 0 ? "🐶":"🌼";
+        var delayedClass = Model.Delayed > 0 ? "btn-warning":"btn-success";
+        var dueClass = Model.DueToday > 0 ? "btn-warning":"btn-success";
+    }
+    <button type="button" class="btn @delayedClass my-2 my-sm-0">
+        <span class="badge badge-light">
+            @Model.Delayed
+        </span>
+        delayed tasks @delayedEmoji
+    </button>
+   
+    <button type="button" class="btn @delayedClass my-2 my-sm-0">
+        <span class="badge badge-light">
+            @Model.DueToday
+        </span>
+        delayed tasks Tasks Due Today ⏰
+    </button>
+</form>
