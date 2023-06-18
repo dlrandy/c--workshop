@@ -1,4 +1,5 @@
 using exer9.Services;
+using exer9.Providers;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -10,6 +11,7 @@ static WeatherForecastServiceV2 BuildWeatherForecastService(IServiceProvider _){
     // _.GetService<ServiceType>
     return new WeatherForecastServiceV2("New York", 4);
 }
+builder.Services.AddSingleton<ICurrentTimeProvider, CurrentTimeUtcProvider>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
