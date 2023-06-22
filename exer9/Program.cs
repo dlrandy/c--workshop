@@ -1,6 +1,10 @@
 using exer9.Services;
 using exer9.Providers;
+using exer9.Exceptions;
+using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
+using Hellang.Middleware.ProblemDetails;
+using Microsoft.AspNetCore.Mvc;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -12,6 +16,17 @@ builder.Services.AddMemoryCache();
 //     // _.GetService<ServiceType>
 //     return new WeatherForecastServiceV2("New York", 4);
 // }
+builder.Services.AddProblemDetails(opt =>{
+    // https://github.com/khellang/Middleware/blob/master/samples/ProblemDetails.MinimalApiSample/Program.cs
+    opt.IncludeExceptionDetails = (context, exception) => builder.Environment.IsDevelopment();
+    opt.MapToStatusCode<NoSuchWeekdayException>(StatusCodes.Status404NotFound);
+    // opt.Map<NoSuchWeekdayException>(ex => new ProblemDetails
+    // {
+    //     Title = "Could not find day",
+    //     Status = StatusCodes.Status404NotFound,
+    //     Detail = ex.Message,
+    // });
+});
 builder.Services.AddSingleton<ICurrentTimeProvider, CurrentTimeUtcProvider>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -31,14 +46,15 @@ builder.Services.AddSwaggerGen(cfg =>
 // });
 var app = builder.Build();
 
-
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1"); });
+    app.UseDeveloperExceptionPage();
 }
 
+app.UseProblemDetails();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

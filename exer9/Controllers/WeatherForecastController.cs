@@ -47,16 +47,16 @@ public class WeatherForecastController : ControllerBase
     [HttpGet("weekday/{day}")]
     public IActionResult GetWeekDay(int day)
     {
-        try
-        {
+        // try
+        // {
             var result = _weatherForecastService1.GetWeekday(day);
             result = _weatherForecastService2.GetWeekday(day);
             return Ok(result);
-        }
-        catch (NoSuchWeekdayException exception)
-        {
-            return NotFound(exception.Message);
-        }
+        // }
+        // catch (NoSuchWeekdayException exception)
+        // {
+        //     return NotFound(exception.Message);
+        // }
     }
 
     /// <summary>
