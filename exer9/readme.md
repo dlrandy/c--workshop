@@ -8,7 +8,8 @@ dotnet dev-certs https --trust
 
 dotnet add package Swashbuckle.AspNetCore
 
+dotnet add package Hellang.Middleware.ProblemDetails
 
-
+dotnet add package FluentValidation.AspNetCore
 
 

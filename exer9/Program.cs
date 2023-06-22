@@ -1,8 +1,11 @@
 using exer9.Services;
 using exer9.Providers;
 using exer9.Exceptions;
+using exer09.Validators;
+using FluentValidation.AspNetCore;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
+using FluentValidation;
 using Hellang.Middleware.ProblemDetails;
 using Microsoft.AspNetCore.Mvc;
 var builder = WebApplication.CreateBuilder(args);
@@ -10,13 +13,15 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.Services.AddFluentValidation();
 builder.Services.AddSingleton<IWeatherForecastService, WeatherForecastService>();
 builder.Services.AddMemoryCache();
 // static WeatherForecastServiceV2 BuildWeatherForecastService(IServiceProvider _){
 //     // _.GetService<ServiceType>
 //     return new WeatherForecastServiceV2("New York", 4);
 // }
-builder.Services.AddProblemDetails(opt =>{
+builder.Services.AddProblemDetails(opt =>
+{
     // https://github.com/khellang/Middleware/blob/master/samples/ProblemDetails.MinimalApiSample/Program.cs
     opt.IncludeExceptionDetails = (context, exception) => builder.Environment.IsDevelopment();
     opt.MapToStatusCode<NoSuchWeekdayException>(StatusCodes.Status404NotFound);
@@ -27,6 +32,8 @@ builder.Services.AddProblemDetails(opt =>{
     //     Detail = ex.Message,
     // });
 });
+
+builder.Services.AddValidatorsFromAssemblyContaining<WeatherForecastValidator>();
 builder.Services.AddSingleton<ICurrentTimeProvider, CurrentTimeUtcProvider>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
