@@ -2,7 +2,7 @@ using System;
 using exer9.Models;
 using FluentValidation;
 
-namespace exer09.Validators;
+namespace exer9.Validators;
 public class WeatherForecastValidator:AbstractValidator<WeatherForecast>
 {
     public WeatherForecastValidator(){
