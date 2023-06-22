@@ -1,4 +1,4 @@
-namespace exer9;
+namespace exer9.Models;
 
 public class WeatherForecast
 {

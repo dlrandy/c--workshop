@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using exer9.Services;
 using exer9.Exceptions;
+using exer9.Models;
 namespace exer9.Controllers;
 
 [ApiController]

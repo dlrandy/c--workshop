@@ -33,6 +33,8 @@ builder.Services.AddProblemDetails(opt =>
     // });
 });
 
+builder.Services.Configure<WeatherForecastConfig>(builder.Configuration.GetSection(nameof(WeatherForecastConfig)));
+
 builder.Services.AddValidatorsFromAssemblyContaining<WeatherForecastValidator>();
 builder.Services.AddSingleton<ICurrentTimeProvider, CurrentTimeUtcProvider>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

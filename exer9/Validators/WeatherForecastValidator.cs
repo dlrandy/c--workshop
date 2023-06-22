@@ -1,5 +1,5 @@
 using System;
-using exer9;
+using exer9.Models;
 using FluentValidation;
 
 namespace exer09.Validators;

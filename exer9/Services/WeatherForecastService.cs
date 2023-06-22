@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using exer9.Exceptions;
+using exer9.Models;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Options;
 namespace exer9.Services;
 
 public class WeatherForecastService : IWeatherForecastService
@@ -11,6 +13,7 @@ public class WeatherForecastService : IWeatherForecastService
     private readonly Guid _serviceIdentifier;
     private readonly IMemoryCache _cache;
     public WeatherForecastService(ILogger<WeatherForecastService> logger,
+    IOptions<WeatherForecastConfig> config,
    IMemoryCache cache)
     {
         _logger = logger;
