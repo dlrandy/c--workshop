@@ -15,7 +15,7 @@ public static class WeatherServiceSetup
    IServiceCollection services, IConfiguration configuration)
     {
         services.AddScoped<IWeatherForecastService,
-       WeatherForecastService>(BuildWeatherForecastService);
+       WeatherForecastService>();//(BuildWeatherForecastService);
         services.AddSingleton<ICurrentTimeProvider,
        CurrentTimeUtcProvider>();
         services.AddSingleton<IMemoryCache, MemoryCache>();
@@ -23,14 +23,14 @@ public static class WeatherServiceSetup
         GetSection(nameof(WeatherForecastConfig)));
         return services;
     }
-    private static WeatherForecastService
-   BuildWeatherForecastService(IServiceProvider provider)
-    {
-        var logger = provider
-        .GetService<ILoggerFactory>().CreateLogger<WeatherForecastService>();
-        var options = provider.
-       GetService<IOptions<WeatherForecastConfig>>();
-        return new WeatherForecastService(logger, options, provider.
-       GetService<IMemoryCache>());
-    }
+    // private static WeatherForecastService
+//    BuildWeatherForecastService(IServiceProvider provider)
+//     {
+//         var logger = provider
+//         .GetService<ILoggerFactory>().CreateLogger<WeatherForecastService>();
+//         var options = provider.
+//        GetService<IOptions<WeatherForecastConfig>>();
+//         return new WeatherForecastService(logger, options, provider.
+//        GetService<IMemoryCache>());
+//     }
 }

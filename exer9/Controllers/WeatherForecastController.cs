@@ -5,7 +5,7 @@ using exer9.Models;
 namespace exer9.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("[controller]")] 
 public class WeatherForecastController : ControllerBase
 {
     private static readonly string[] Summaries = new[]
@@ -32,7 +32,7 @@ public class WeatherForecastController : ControllerBase
     {
         return Enumerable.Range(1, 5).Select(index => new WeatherForecast
         {
-            Date = DateTime.Now.AddDays(index),
+            DateTime = DateTime.Now.AddDays(index),
             TemperatureC = Random.Shared.Next(-20, 55),
             Summary = Summaries[Random.Shared.Next(Summaries.Length)]
         })
@@ -90,7 +90,7 @@ public class WeatherForecastController : ControllerBase
         _weatherForecastService1.SaveWeatherForecast(weatherForecast);
         return CreatedAtAction("GetWeatherForecast", new
         {
-            date = weatherForecast.Date.ToShortDateString()
+            date = weatherForecast.DateTime.ToShortDateString()
         }, weatherForecast);
     }
 }

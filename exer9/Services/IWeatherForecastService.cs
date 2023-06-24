@@ -5,5 +5,5 @@ public interface IWeatherForecastService
 {
     public WeatherForecast GetWeekday(int day);
     void SaveWeatherForecast(WeatherForecast forecast);
-    WeatherForecast GetWeatherForecast(DateTime date);
+    Task<WeatherForecast> GetWeatherForecast(DateTime date);
 }

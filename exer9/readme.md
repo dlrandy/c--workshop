@@ -13,3 +13,15 @@ dotnet add package Hellang.Middleware.ProblemDetails
 dotnet add package FluentValidation.AspNetCore
 
 
+https://toolslick.com/generation/code/class-from-csv
+
+
+dotnet add package CsvHelper
+
+dotnet add package AutoMapper.Extensions.Microsoft.DependencyInjection
+
+
+
+
+
+

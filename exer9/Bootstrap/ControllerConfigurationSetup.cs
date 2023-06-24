@@ -8,7 +8,7 @@ public static class ControllerConfigurationSetup
 {
     public static IServiceCollection AddControllersConfiguration(this IServiceCollection services)
     {
-        services.AddControllers().AddFluentValidation();
+        services.AddControllers().AddFluentValidation().AddNewtonsoftJson();
         return services;
     }
 }
